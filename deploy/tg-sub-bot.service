@@ -1,0 +1,21 @@
+[Unit]
+Description=Telegram subscription bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tgbot
+WorkingDirectory=/opt/tg-sub-bot
+ExecStart=/opt/tg-sub-bot/.venv/bin/python -m bot
+Restart=always
+RestartSec=5
+# Ключи лежат в /opt/tg-sub-bot/.env (chmod 600), бот читает его сам.
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/tg-sub-bot/data
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
